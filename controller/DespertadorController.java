@@ -8,45 +8,51 @@ public class DespertadorController extends DespertadorView {
         return DespertadorModel.mostrarOpcoes();
     }
 
-    public static String acaoDespertador(int opcaoUsuario) {
-        String resposta = "";
-        Scanner scnAdiar = new Scanner(System.in);
-        int respostaAdiar;
-        switch (opcaoUsuario) {
-            case 1:
-                System.out.println(ANSI_GREEN + "Digite o número da opção abaixo e tecle Enter:" + ANSI_RESET);
-                for (int a = 0; a < adiamentos.length; a++) {
-                    System.out.println(
-                        String.format(
-                            ANSI_YELLOW + "[%d] >> adiar %d minutos" + ANSI_RESET, 
-                            a + 1, 
-                            adiamentos[a]
-                        )
-                    );
-                }
-                respostaAdiar = scnAdiar.nextInt();
-                adiar = adiamentos[respostaAdiar - 1];
+    public static void acaoDespertador(int opcaoUsuario) {
+        if (adiamentoAtual < 3) {
+            switch (opcaoUsuario) {
+                case 1:
+                    if (mostrarOpcoesAdiamentos()) {
+                        if ((minutoAtual + adiar) > 59) {
+                            horaDespertar++;
+                            if (horaDespertar > 23) {
+                                horaDespertar = 0;
+                            }
+                            minutoDespertar = (minutoAtual + adiar) - 59;
+                        } else {
+                            minutoDespertar = minutoAtual + adiar;
+                        }
+                        adiamentoAtual++;
+                        exibirAlarmeAdiado(adiar);
+                    } else {
+                        break;
+                    }
+                    break;
 
-                resposta = ANSI_BLUE + "Ok! Alarme adiado em: " + adiar + " minutos." + ANSI_RESET;
-                minutoDespertar += adiar;
-                if (minutoDespertar > 59) {
-                    minutoDespertar = 59;
-                }
-                break;
+                case 2:
+                    sairDoSistema();
+                    break;
 
-            case 2:
-                System.out.println(ANSI_CYAN + "Ok! Alarme parado." + ANSI_RESET);
-                System.exit(0);
-                break;
-
-            default:
-                resposta = ANSI_WHITE + "Opção inválida." + ANSI_RESET;
-                break;
+                default:
+                    mostrarOpcaoInvalida();
+                    break;
+            }
+        } else {
+            sairDoSistema();
         }
-        scnAdiar.close();
-        return resposta;
+    }
+    
+    public static int tempoHoraRestante(){
+        int tH = horaDespertar - horaAtual; 
+        return tempoHoraRestante();
+    }
+    
+    public static int tempoMinutorRestante(){
+        int tM = minutoDespertar - minutoAtual;
+        return tempoMinutorRestante();
     }
 
+    
     public static void getHMS() {
         date = new Date();
         calendar = GregorianCalendar.getInstance();
