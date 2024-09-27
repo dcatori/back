@@ -24,11 +24,11 @@ public class RenameFile {
                 fileName = chooser.getSelectedFile().getName();
                 System.out.println("File Full Path: " + fileFullPath);
             } else {
-                System.out.println("No file selected.");
+                System.out.println("Nenhum arquvio selecionado.");
                 return;
             }
 
-            chooser.setDialogTitle("Select the destination folder");
+            chooser.setDialogTitle("Selecionar a pasta de destino");
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int val2 = chooser.showOpenDialog(null);
             String folderFullPath = "";
@@ -37,14 +37,14 @@ public class RenameFile {
                 System.out.println("You chose the folder: " + chooser.getSelectedFile().getName());
                 System.out.println("Folder Full Path: " + chooser.getSelectedFile().getAbsolutePath());
             } else {
-                System.out.println("No folder selected.");
+                System.out.println("Cade a pasta");
                 return;
             }
 
             
-            String newFileName = JOptionPane.showInputDialog("Enter the new file name (with extension):", fileName);
+            String newFileName = JOptionPane.showInputDialog("Nome do novo arquvio:", fileName);
             if (newFileName == null || newFileName.trim().isEmpty()) {
-                System.out.println("Invalid filename. Operation canceled.");
+                System.out.println("Nem deu pra trocar");
                 return;
             }
 
