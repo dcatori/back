@@ -1,7 +1,6 @@
 package view;
 
 import controller.HelperController;
-import controller.LogarController;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -68,13 +67,7 @@ public class TelaLoginView extends JFrame {
         entrarJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                if (LogarController.logar(loginTextField.getText(), senhaPasswordField.getPassword())) {
-                    // Se o login for bem-sucedido, abrir a TelaPrincipalView
-                    new TelaPrincipalView();
-                    dispose(); // Fecha a tela de login
-                } else {
-                    notificacaoJLabel.setText("Login falhou! Tente novamente.");
-                }
+                LogarController.logar();
             }
         });
 

@@ -1,24 +1,42 @@
 package model;
 
-import controller.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Login {
 
-    public static boolean loginUsuario(String login, String senha) {
+    private String email;
+    private String senha;
+
+    public Login(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public boolean login() {
+        Connection conn = MySQLConnector.conectar();
+        String query = "SELECT * FROM tbl_teste WHERE email = ? AND senha = ?";
+
         try {
-            Connection conexao = MySQLConnector.conectar();
-            String strSqlLogin = "select * from `" + InterfaceController.db + "`.`" + InterfaceController.tbl + "`" + " where `email` = '" + login + "' and `senha` = '" + senha + "';";
-            System.out.println(strSqlLogin);
-            Statement stmSqlLogin = conexao.createStatement();
-            ResultSet rstSqlLogin = stmSqlLogin.executeQuery(strSqlLogin);
-            if (rstSqlLogin.next()) {
-                return true;
-            } else {
-                return false;
-            }
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, this.email);
+            stmt.setString(2, this.senha);
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next(); // Retorna true se houver um usuário correspondente
+
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
