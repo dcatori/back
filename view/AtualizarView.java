@@ -1,8 +1,9 @@
 package view;
+
 import java.awt.*;
 import javax.swing.*;
 
-public class AtualizarView extends JFrame{
+public class AtualizarView extends JFrame {
 
     private final JLabel nomeJLabel = new JLabel("Nome: ");
     private final JLabel emaiLJLabel = new JLabel("Email: ");
@@ -13,9 +14,7 @@ public class AtualizarView extends JFrame{
     private final JButton atualizarJButton = new JButton("✔");
     private final JLabel notificacaoJLabel = new JLabel("Notificação: ");
 
-
-    public AtualizarView(){
-
+    public AtualizarView(TelaPrincipalView telaPrincipal) {
         super("Atualizar Registro");
         setLayout(new GridLayout(5, 3, 5, 5));
 
@@ -24,7 +23,6 @@ public class AtualizarView extends JFrame{
         JPanel linha3JPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         JPanel linha4JPanel = new JPanel(new GridLayout(1, 1, 5, 5));
         JPanel linha5JPanel = new JPanel(new GridLayout(1, 2, 5, 5));
-
 
         linha1JPanel.add(nomeJLabel);
         linha1JPanel.add(nomeTextField);
@@ -45,17 +43,14 @@ public class AtualizarView extends JFrame{
         linha5JPanel.add(notificacaoJLabel);
         add(linha5JPanel);
 
-
         setSize(400, 200);
         setVisible(true);
+        setLocationRelativeTo(null);
 
-    }
-
-    public static void main(String[] args) {
-        AtualizarView att = new AtualizarView();
-        att.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        atualizarJButton.addActionListener(event -> {
+            // Aqui você pode implementar a lógica para atualizar
+            notificacaoJLabel.setText("Registro atualizado com sucesso!"); // Exemplo
+            dispose(); // Fecha a tela
+        });
     }
 }
-
-

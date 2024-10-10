@@ -1,8 +1,9 @@
 package view;
+
 import java.awt.*;
 import javax.swing.*;
 
-public class DeletarView extends JFrame{
+public class DeletarView extends JFrame {
 
     private final JLabel idJLabel = new JLabel("ID");
     private final JLabel nomeJLabel = new JLabel("Nome");
@@ -11,9 +12,7 @@ public class DeletarView extends JFrame{
     private final JButton deletarJButton = new JButton("Deletar");
     private final JLabel notificacaoJLabel = new JLabel("Notificação: ");
 
-
-    public DeletarView(){
-
+    public DeletarView(TelaPrincipalView telaPrincipal) {
         super("Deletar Registro");
         setLayout(new GridLayout(4, 3, 5, 5));
 
@@ -21,7 +20,7 @@ public class DeletarView extends JFrame{
         JPanel linha2JPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         JPanel linha3JPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         JPanel linha4JPanel = new JPanel(new GridLayout(1, 1, 5, 5));
-        
+
         linha1JPanel.add(idJLabel);
         linha1JPanel.add(idTextField);
         add(linha1JPanel);
@@ -39,12 +38,12 @@ public class DeletarView extends JFrame{
 
         setSize(400, 200);
         setVisible(true);
+        setLocationRelativeTo(null);
 
-    }
-
-    public static void main(String[] args) {
-        DeletarView del = new DeletarView();
-        del.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        deletarJButton.addActionListener(event -> {
+            // Aqui você pode implementar a lógica para deletar
+            notificacaoJLabel.setText("Registro deletado com sucesso!"); // Exemplo
+            dispose(); // Fecha a tela
+        });
     }
 }

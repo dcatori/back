@@ -1,8 +1,9 @@
 package view;
+
 import java.awt.*;
 import javax.swing.*;
 
-public class PesquisarView extends JFrame{
+public class PesquisarView extends JFrame {
 
     private final JLabel nomeJLabel = new JLabel("Nome");
     private final JLabel emaiLJLabel = new JLabel("Email");
@@ -11,9 +12,7 @@ public class PesquisarView extends JFrame{
     private final JButton pesquisarJButton = new JButton("🔎");
     private final JLabel notificacaoJLabel = new JLabel("Notificação: ");
 
-
-    public PesquisarView(){
-
+    public PesquisarView(TelaPrincipalView telaPrincipal) {
         super("Pesquisar Registro");
         setLayout(new GridLayout(4, 3, 5, 5));
 
@@ -21,7 +20,6 @@ public class PesquisarView extends JFrame{
         JPanel linha2JPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         JPanel linha3JPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         JPanel linha4JPanel = new JPanel(new GridLayout(1, 1, 5, 5));
-
 
         linha1JPanel.add(nomeJLabel);
         linha1JPanel.add(nomeTextField);
@@ -38,18 +36,14 @@ public class PesquisarView extends JFrame{
         linha4JPanel.add(notificacaoJLabel);
         add(linha4JPanel);
 
-
-        
         setSize(400, 200);
         setVisible(true);
+        setLocationRelativeTo(null);
 
-    }
-
-    public static void main(String[] args) {
-        PesquisarView pesq = new PesquisarView();
-        pesq.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        pesquisarJButton.addActionListener(event -> {
+            // Aqui você pode implementar a lógica para pesquisar
+            notificacaoJLabel.setText("Registro encontrado!"); // Exemplo
+            dispose(); // Fecha a tela
+        });
     }
 }
-
-
